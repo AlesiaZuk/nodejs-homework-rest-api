@@ -1,16 +1,16 @@
 const createError = require("http-errors");
 
-const { updateContact } = require("../models/contactsOperations");
-const contactsSchema = require("../middlewares");
+const { Contact, joiSchema } = require("../../models");
 
 const changeContact = async (req, res, next) => {
   try {
-    const { error } = contactsSchema.validate(req.body);
+    const { error } = joiSchema.validate(req.body);
     if (error) {
       throw createError(400, "missing fields");
     }
     const { id } = req.params;
-    const result = await updateContact({ ...req.body, id });
+    const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
+    console.log(result);
     if (!result) {
       throw createError(404, "Not found");
     }
