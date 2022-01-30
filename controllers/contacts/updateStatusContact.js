@@ -6,7 +6,7 @@ const updateStatusContact = async (req, res, next) => {
   try {
     const { error } = favoriteJoiSchema.validate(req.body);
     if (error) {
-      throw createError(400, "missing fields");
+      throw createError(400, "missing field favorite");
     }
     const { id } = req.params;
     const { favorite } = req.body;
