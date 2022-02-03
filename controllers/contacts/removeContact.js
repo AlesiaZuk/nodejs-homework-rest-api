@@ -1,6 +1,8 @@
 const createError = require("http-errors");
 
-const { Contact } = require("../../models");
+const {
+  contact: { Contact },
+} = require("../../models");
 
 const deleteContact = async (req, res, next) => {
   try {

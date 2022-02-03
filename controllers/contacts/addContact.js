@@ -1,6 +1,8 @@
 const createError = require("http-errors");
 
-const { Contact, joiSchema } = require("../../models");
+const {
+  contact: { Contact, joiSchema },
+} = require("../../models");
 
 const addNewContact = async (req, res, next) => {
   try {
