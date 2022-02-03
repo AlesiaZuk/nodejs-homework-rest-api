@@ -5,8 +5,9 @@ const {
   listContactById,
   addNewContact,
   changeContact,
+  updateStatusContact,
   deleteContact,
-} = require("../../controllers");
+} = require("../../controllers/contacts");
 
 const router = express.Router();
 
@@ -17,6 +18,8 @@ router.get("/:id", listContactById);
 router.post("/", addNewContact);
 
 router.put("/:id", changeContact);
+
+router.patch("/:id/favorite", updateStatusContact);
 
 router.delete("/:id", deleteContact);
 
