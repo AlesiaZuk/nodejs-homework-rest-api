@@ -1,9 +1,8 @@
-// const { User } = require("../../models/user");
-
 const current = async (req, res, next) => {
-  const { email } = req.user;
+  const { email, subscription } = req.user;
   res.json({
     email,
+    subscription,
   });
 };
 

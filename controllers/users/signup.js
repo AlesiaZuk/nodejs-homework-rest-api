@@ -17,10 +17,11 @@ const signup = async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    await User.create({ email, password: hashPassword });
+    const result = await User.create({ email, password: hashPassword });
     res.status(201).json({
       user: {
         email,
+        subscription: result.subscription,
       },
     });
   } catch (error) {

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const { User, joiLoginSchema } = require("../../models/user");
 const { SECRET_KEY } = process.env;
+
 const login = async (req, res, next) => {
   try {
     const { error } = joiLoginSchema.validate(req.body);
@@ -23,10 +24,12 @@ const login = async (req, res, next) => {
       id: user._id,
     };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    await User.findByIdAndUpdate(user._id, { token });
     res.json({
       token,
       user: {
         email,
+        subscription: user.subscription,
       },
     });
   } catch (error) {

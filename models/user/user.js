@@ -17,15 +17,15 @@ const userSchema = Schema(
       required: [true, "Password is required"],
       minlength: 6,
     },
-    // subscription: {
-    //   type: String,
-    //   enum: ["starter", "pro", "business"],
-    //   default: "starter",
-    // },
-    // token: {
-    //   type: String,
-    //   default: null,
-    // },
+    subscription: {
+      type: String,
+      enum: ["starter", "pro", "business"],
+      default: "starter",
+    },
+    token: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -33,7 +33,7 @@ const userSchema = Schema(
 const joiSignupSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
-  // subscription: Joi.string().valueOf("starter", "pro", "business"),
+  subscription: Joi.string().valueOf("starter", "pro", "business"),
 });
 
 const joiLoginSchema = Joi.object({
