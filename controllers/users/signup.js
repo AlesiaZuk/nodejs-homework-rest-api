@@ -1,11 +1,14 @@
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
+const gravatar = require("gravatar");
 
 const { User, joiSignupSchema } = require("../../models/user");
 
 const signup = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { error } = joiSignupSchema.validate(req.body);
+    console.log(error);
     if (error) {
       throw createError(400, "Error from Joi or another validation library");
     }
@@ -17,7 +20,12 @@ const signup = async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
-    const result = await User.create({ email, password: hashPassword });
+    const avatarURL = gravatar.url(email);
+    const result = await User.create({
+      email,
+      password: hashPassword,
+      avatarURL,
+    });
     res.status(201).json({
       user: {
         email,

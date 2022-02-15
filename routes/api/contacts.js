@@ -9,7 +9,7 @@ const {
   deleteContact,
 } = require("../../controllers/contacts");
 
-const checkToken = require("../../middlewares/checkToken");
+const { checkToken } = require("../../middlewares");
 
 const router = express.Router();
 
