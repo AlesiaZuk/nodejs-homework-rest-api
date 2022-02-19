@@ -1,12 +1,24 @@
 const express = require("express");
+
 const {
-  users: { signup, login, current, logout, subscription, avatars },
+  users: {
+    signup,
+    verify,
+    repeatVerify,
+    login,
+    current,
+    logout,
+    subscription,
+    avatars,
+  },
 } = require("../../controllers");
 const { checkToken, upload } = require("../../middlewares");
 
 const router = express.Router();
 
 router.post("/signup", signup);
+router.get("/verify/:verificationToken", verify);
+router.post("/verify", repeatVerify);
 router.post("/login", login);
 router.get("/current", checkToken, current);
 router.get("/logout", checkToken, logout);
