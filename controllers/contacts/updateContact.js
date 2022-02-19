@@ -12,7 +12,6 @@ const changeContact = async (req, res, next) => {
     }
     const { id } = req.params;
     const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
-    console.log(result);
     if (!result) {
       throw createError(404, "Not found");
     }
